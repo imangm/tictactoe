@@ -8,60 +8,85 @@ body {
 }
 
 #root {
-	background-color: #ddd;
+	background-color: #eee;
 	display: inline-block;
 	width: 100%;
 	padding: 30px;
+	height: 100vh;
 }
 
-.btn {
+.grid {
+	float: left;
+	display: inline-grid;
+	grid-gap: 0;
+	grid-template-columns: 50px 50px 50px;
+	grid-template-rows: 50px 50px 50px;
 	margin-right: 30px;
-	padding: 12px 20px;
-	background-image: linear-gradient(45deg, rgb(72, 62, 128), rgb(255, 0, 157));
-	color: #eee;
+	margin-bottom: 30px;
+	border-left: 1px solid #ddd;
+}
+
+.grid-item {
 	border: 0;
-	border-radius: 10px;
-	font-family: "Open Sans";
-	font-size: 16px;
-	outline: 0;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-	transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.btn:hover {
-	background-color: rgb(15, 68, 117);
-	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
-}
-
-.loader {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 	background-color: #fff;
-	text-align: center;
-	transition: visibility 1s ease-in-out,
-		opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+	font-size: 21px;
+	font-weight: bold;
+	outline: 0;
 }
 
-.loader span {
-	position: absolute;
-	width: 200px;
-	border-radius: 10px;
-	box-shadow: 0 0 40px 0px #e2e2e2;
-	padding: 30px;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
+.grid-item:hover {
+	cursor: pointer;
+	background-color: #f2fff2;
 }
 
-.loader.loading {
-	opacity: 1;
-	visibility: visible;
+.status-bar-container {
+	clear: both;
 }
 
-.loader.loaded {
-	opacity: 0;
-	visibility: hidden;
+.status-bar {
+	display: inline-block;
+	padding: 8px 16px;
+	border: 1px solid #ccc;
+	background-color: #ddd;
+}
+
+.status-bar.error {
+	background-color: darkred;
+	color: white;
+}
+
+.status-bar.info {
+	background-color: lightgreen;
+	color: darkgreen;
+}
+
+.status-bar.alert {
+	background-color: coral;
+	color: white;
+}
+
+.history {
+	float: left;
+}
+
+.history h4 {
+	margin-top: 0;
+}
+
+.history .btn {
+	display: block;
+	background: white;
+	margin-bottom: 10px;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	outline: 0;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.history .btn:hover {
+	background-color: lightskyblue;
 }

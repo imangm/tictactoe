@@ -137,6 +137,17 @@ const chooseNextOne = (sqArray) => {
 	// corner squares are better normally
 	const cornerSquares = [0, 2, 6, 8];
 	const sideSquares = [1, 3, 5, 7];
+	const xSideSquares = [
+		[0, 8],
+		[2, 6],
+	];
+
+	// const wingSides = [
+	// 	[0, 4],
+	// 	[2, 4],
+	// 	[6, 4],
+	// 	[8, 4],
+	// ];
 
 	squares.forEach((item, index) => {
 		if (item === null) nSquares.push(index);
@@ -153,9 +164,11 @@ const chooseNextOne = (sqArray) => {
 
 	//prevent 2 ways if o is centered and Xes are on two opposite corners
 	if (xSquares.length === 2) {
-		if ([0, 8].every((item) => xSquares.includes(item)))
-			return sideSquares[Math.floor(Math.random() * 3)];
-		if ([2, 6].every((item) => xSquares.includes(item)))
+		if (
+			xSideSquares.some((xSide) =>
+				xSide.every((item) => xSquares.includes(item))
+			)
+		)
 			return sideSquares[Math.floor(Math.random() * 3)];
 	}
 
@@ -189,6 +202,14 @@ const chooseNextOne = (sqArray) => {
 	if (preventLoss.length) {
 		return preventLoss[0].find((item) => nSquares.includes(item));
 	}
+
+	const availableCornerSquares = cornerSquares.filter((item) =>
+		nSquares.includes(item)
+	);
+	if (availableCornerSquares.length)
+		return availableCornerSquares[
+			Math.floor(Math.random() * availableCornerSquares.length)
+		];
 
 	// return a random item (level 1)
 	return nSquares[Math.floor(Math.random() * (nSquares.length - 1))];

@@ -142,13 +142,6 @@ const chooseNextOne = (sqArray) => {
 		[2, 6],
 	];
 
-	// const wingSides = [
-	// 	[0, 4],
-	// 	[2, 4],
-	// 	[6, 4],
-	// 	[8, 4],
-	// ];
-
 	squares.forEach((item, index) => {
 		if (item === null) nSquares.push(index);
 		if (item === "X") xSquares.push(index);
@@ -203,6 +196,7 @@ const chooseNextOne = (sqArray) => {
 		return preventLoss[0].find((item) => nSquares.includes(item));
 	}
 
+	// always put in corners if any is available
 	const availableCornerSquares = cornerSquares.filter((item) =>
 		nSquares.includes(item)
 	);

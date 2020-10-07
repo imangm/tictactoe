@@ -1,5 +1,9 @@
 # TicTacToe Using ReactJS Function Components
 
+This ReactJS program has a two player mode and a player vs CPU mode which you can never win the CPU!
+
+## Bootstrapped with CRA
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

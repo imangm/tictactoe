@@ -136,6 +136,7 @@ const chooseNextOne = (sqArray) => {
 
 	// corner squares are better normally
 	const cornerSquares = [0, 2, 6, 8];
+	const sideSquares = [1, 3, 5, 7];
 
 	squares.forEach((item, index) => {
 		if (item === null) nSquares.push(index);
@@ -148,6 +149,14 @@ const chooseNextOne = (sqArray) => {
 		return !xSquares.includes(4)
 			? 4
 			: cornerSquares[Math.floor(Math.random() * 3)];
+	}
+
+	//prevent 2 ways if o is centered and Xes are on two opposite corners
+	if (xSquares.length === 2) {
+		if ([0, 8].every((item) => xSquares.includes(item)))
+			return sideSquares[Math.floor(Math.random() * 3)];
+		if ([2, 6].every((item) => xSquares.includes(item)))
+			return sideSquares[Math.floor(Math.random() * 3)];
 	}
 
 	// find available winning conditions (not any x in row)

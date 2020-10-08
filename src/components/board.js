@@ -221,12 +221,14 @@ const checkWinner = (sqArray) => {
 		[2, 4, 6],
 	];
 
-	for (let i = 0; i < winConditions.length; i++) {
-		if (winConditions[i].every((x) => sqArray.squares[x] === "X")) {
-			return "X";
-		} else if (winConditions[i].every((x) => sqArray.squares[x] === "O")) {
-			return "O";
-		}
+	for (const winCondition of winConditions) {
+		const [b1, b2, b3] = winCondition;
+		if (
+			sqArray.squares[b1] &&
+			sqArray.squares[b1] === sqArray.squares[b2] &&
+			sqArray.squares[b1] === sqArray.squares[b3]
+		)
+			return sqArray.squares[b1];
 	}
 
 	return false;

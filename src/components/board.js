@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Squares } from "./squares";
 import { StatusBar } from "./statusbar";
 import { GameMode } from "./gamemode";
@@ -17,6 +17,26 @@ export const Board = (props) => {
 		type: "info",
 		message: "Let's Start The Game!",
 	});
+
+	const handleSqClick = useCallback((sqOrder) => {
+		if (!winner) {
+			if (!buttons.squares[sqOrder]) {
+				setButtons((prev) => {
+					const prevSquares = [...prev.squares];
+					prevSquares[sqOrder] = prev.nextVal;
+					return {
+						squares: prevSquares,
+						nextVal: prev.nextVal === "X" ? "O" : "X",
+					};
+				});
+			} else {
+				setStatus(() => ({
+					type: "error",
+					message: "This square is already taken!",
+				}));
+			}
+		}
+	}, [buttons.squares, winner]);
 
 	useEffect(() => {
 		if (!winner) setHistory((prev) => [...prev, buttons]);
@@ -60,7 +80,7 @@ export const Board = (props) => {
 			// const nextOne = nextBestMove(buttons);
 			handleSqClick(nextOne);
 		}
-	}, [buttons, winner, artIntMode]);
+	}, [buttons, winner, artIntMode, handleSqClick]);
 
 	useEffect(() => {
 		setStatus(() => ({
@@ -68,26 +88,6 @@ export const Board = (props) => {
 			message: "Let's Start The Game!",
 		}));
 	}, []);
-
-	const handleSqClick = (sqOrder) => {
-		if (!winner) {
-			if (!buttons.squares[sqOrder]) {
-				setButtons((prev) => {
-					const prevSquares = [...prev.squares];
-					prevSquares[sqOrder] = prev.nextVal;
-					return {
-						squares: prevSquares,
-						nextVal: prev.nextVal === "X" ? "O" : "X",
-					};
-				});
-			} else {
-				setStatus(() => ({
-					type: "error",
-					message: "This square is already taken!",
-				}));
-			}
-		}
-	};
 
 	const goToMove = (moveIndex) => {
 		setButtons({
